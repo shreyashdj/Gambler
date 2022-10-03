@@ -10,6 +10,7 @@ public class Gambler {
     public static void main(String[] args) {
         /*
          *  printing welcome message
+         * used for loop to play game till 20 days and every time add last day remaining stack to new day
          *  used while  loop to play game till gambler win or loose 50% of everyDayStack
          *  In while loop,
          *  make bet of 1, use Math.random to get 0 or 1
@@ -18,17 +19,23 @@ public class Gambler {
          *  print Remaining Stack
          */
         System.out.println("\n ***** Welcome to GamblingSimulator *****");
-        while (everyDayStack > 50 && everyDayStack < 150) {
-
-            int makeBet = (int) (Math.random()*2);
-            if (makeBet == 1) {
-                everyDayStack += betForGame;
-                System.out.println("\n Won the Bet");
-            } else {
-                everyDayStack -= betForGame;
-                System.out.println("\n Loose the Bet");
+        System.out.println(" Starting stake = " + everyDayStack);
+        int stack = 0;
+        for (int day = 1; day <= 20; day++) {
+            stack += everyDayStack;
+            int minStake = (stack-stack/2);
+            int maxStake = (stack+stack/2);
+            System.out.println("\n Day : " + day);
+            System.out.println(" Starting stake = " + stack);
+            while (stack > minStake && stack < maxStake) {
+                int makeBet = (int) (Math.random() * 2);
+                if (makeBet == 1) {
+                    stack += betForGame;
+                } else {
+                    stack -= betForGame;
+                }
             }
-            System.out.println(" Remaining stake = " + everyDayStack);
+            System.out.println(" Remaining stake = " + stack);
         }
     }
 }
