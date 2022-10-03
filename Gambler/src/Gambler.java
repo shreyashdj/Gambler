@@ -23,12 +23,16 @@ public class Gambler {
         System.out.println("\n ***** Welcome to GamblingSimulator *****");
         System.out.println(" Starting stake = " + everyDayStack);
         int stack = 0;
-        int startingStake;
+        int startingStack;
         int winDays = 0;
         int looseDays = 0;
+        int winBy = 0;
+        int looseBy = 0;
+        int maxWin = 0;
+        int maxLoose = 0;
         for (int day = 1; day <= 20; day++) {
             stack += everyDayStack;
-            startingStake = stack;
+            startingStack = stack;
             int minStake = (stack-stack/2);
             int maxStake = (stack+stack/2);
             System.out.println("\n Day : " + day);
@@ -41,15 +45,24 @@ public class Gambler {
                     stack -= betForGame;
                 }
             }
-            if (startingStake < stack) {
+            if (startingStack < stack) {
+                if ((stack - startingStack) > winBy){
+                    maxWin = day;
+                }
                  winDays += 1;
-                System.out.println(" Win by : " + (stack - startingStake));
+                 winBy = (stack - startingStack);
+                System.out.println(" Win by : " + winBy);
             } else {
+                if ((startingStack - stack) > looseBy){
+                    maxLoose = day;
+                }
                 looseDays += 1;
-                System.out.println(" Loose by : " + (startingStake - stack));
+                looseBy = (startingStack - stack);
+                System.out.println(" Loose by : " + looseBy);
             }
             System.out.println(" Remaining stake = " + stack);
         }
-        System.out.println("\n Total days won : " + winDays + "\n Total days loose : " + looseDays);
+        System.out.println("\n Luckiest day is Day " + maxWin + "\n Unluckiest day is Day " + maxLoose);
+        System.out.println(" Total days won : " + winDays + "\n Total days loose : " + looseDays);
     }
 }
