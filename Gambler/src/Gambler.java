@@ -10,19 +10,25 @@ public class Gambler {
     public static void main(String[] args) {
         /*
          *  printing welcome message
-         * used for loop to play game till 20 days and every time add last day remaining stack to new day
+         *  used for loop to play game till 20 days and every time add last day remaining stack to new day
+         *  print starting stack of day
          *  used while  loop to play game till gambler win or loose 50% of everyDayStack
          *  In while loop,
          *  make bet of 1, use Math.random to get 0 or 1
-         *  if we got 1 we will print won message and add 1 to everyDayStack
-         *  else we will print loose message and subtract 1 from everyDayStack
+         *  if we got 1 we will add 1 to everyDayStack
+         *  else we subtract 1 from everyDayStack
+         *  counting number of days won and loose and by how much
          *  print Remaining Stack
          */
         System.out.println("\n ***** Welcome to GamblingSimulator *****");
         System.out.println(" Starting stake = " + everyDayStack);
         int stack = 0;
+        int startingStake;
+        int winDays = 0;
+        int looseDays = 0;
         for (int day = 1; day <= 20; day++) {
             stack += everyDayStack;
+            startingStake = stack;
             int minStake = (stack-stack/2);
             int maxStake = (stack+stack/2);
             System.out.println("\n Day : " + day);
@@ -35,7 +41,15 @@ public class Gambler {
                     stack -= betForGame;
                 }
             }
+            if (startingStake < stack) {
+                 winDays += 1;
+                System.out.println(" Win by : " + (stack - startingStake));
+            } else {
+                looseDays += 1;
+                System.out.println(" Loose by : " + (startingStake - stack));
+            }
             System.out.println(" Remaining stake = " + stack);
         }
+        System.out.println("\n Total days won : " + winDays + "\n Total days loose : " + looseDays);
     }
 }
